@@ -1,11 +1,32 @@
-body{
-    background-color:chocolate;
-}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  
+     
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+
+
 img{
-    height:200px;
-    width: 200px;
+    height:100px;
+    width:100px    
 }
-ul{
-list-style-type: none;
+
+.pad{
+    padding-top: 2vmin;
+}
+.pokiball{
+    height: 20px;
+    width: 20px;
+}
+.pad-down{
+  padding-bottom: 40px;
+  padding-inline-start: 0;
+  padding-left: -10px;
 }
 
