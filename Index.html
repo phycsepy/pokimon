@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+    <link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico">
     <title>Pokedex</title>
-    
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="style.css"> 
-
-     <!-- Compiled and minified CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   
-    
-    
-    
-     
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">    </script>
-
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -61,22 +56,40 @@
   
  </div>
 
-
- 
-
-
-
-  
-      <div class = "container con" id ="">
+<div class = "container con" id ="">
         <ul id = "pokilist" class = "row" >
         </ul>
+        
       </div> 
       
-      
-   <script>
-     $(document).ready(
+        <!-- Modal Trigger -->
+  <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
 
-     )
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content" id = "needed">
+      
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">close</a>
+    </div>
+  </div>
+        
+  
+  <footer class  = "blue">
+    <div class="rounded-social-buttons">
+                      <a class="social-button facebook" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                      <a class="social-button twitter" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                      <a class="social-button linkedin" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                      <a class="social-button youtube" href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+                      <a class="social-button instagram" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                  </div>
+  </footer>
+   <script>
+   
+    $(document).ready(function(){
+        $('.modal').modal();
+      });
        $(document).ready(function(){
     $('ul.collapsible').collapsible();
   });

@@ -1,7 +1,9 @@
-
+const model = document.getElementById('needed')
+const modelplay = document.getElementsByClassName('modal-trigger')
 const search = document.getElementById('autocomplete-input');
 const buttonlist = document.getElementById('buttonlist');
 const but = document.getElementById('btn')
+
 const allpokis = []
 
 for(let i = 1;i<=150;i++){
@@ -26,7 +28,6 @@ colours  = {
   rock: '#B6A136',
   ghost: '#735797',
   dragon: '#6F35FC',
-  dark: '#705746',
   steel: '#B7B7CE',
   fairy: '#D685AD',
 
@@ -34,9 +35,9 @@ colours  = {
 
 };
 
-
+var pokimon ;
  Promise.all(allpokis).then((sol)=>{
-    const  pokimon = sol.map((data) => ({
+    pokimon = sol.map((data) => ({
       name : data.name,
         id : data.id, 
         image :data.sprites.other.dream_world['front_default'],
@@ -54,85 +55,70 @@ colours  = {
      filterstuff(pokimon)
 
     buttonf();
-    //buttonfill(pokimon)
-     //newf(pokimon)
- });
- 
-const playcolor= (val) =>{
-  console.log(val)
-
-}
- const buttonf = () =>{
-  let buttonstr = ''
-  let c = 0;
-    for(let key in colours){
-      if(colours.hasOwnProperty(key)){
-        buttonstr +=`<li class="col s4 " id="btn${c}">
-        <button class="waves-effect btn buttarr" style="background-color:${colours[key]};" onclick="playcolor(${key})" >${key}</button>
-        <li>`
-        c = c + 1;
-      }
-      
-     
-    }
-    // alert(c)
-  // console.log(buttonstr)
-  buttonlist.innerHTML = buttonstr
+    
   
+ });
 
+ 
+ const playcolor = (val)=>{
+  const filterchar = pokimon.filter(pokimon=>{
+     
+    return pokimon.types.includes(val.toLowerCase())
+ });
+ displaystuff(filterchar);
+  
 }
+ 
+
+
+const buttonf = () => {
+  
+  let c = 0;
+  for (let key in colours) {
+    if (colours.hasOwnProperty(key)) {
+      const li = document.createElement("li");
+      li.className = "col s2";
+      li.id = `btn${c}`;
+      const filterButton = document.createElement("a");
+      filterButton.className = "waves-effect btn buttarr";
+      filterButton.style = `background-color:${colours[key]}`;
+      filterButton.innerHTML = key;
+      filterButton.addEventListener("click", () => playcolor(key));
+      li.appendChild(filterButton);
+      buttonlist.appendChild(filterButton);
+      c = c + 1;
+    }
+  }
+};
 
 const filterstuff = (poki)=>{
   search.addEventListener('keyup',ele=>{
-    // console.log(ele.target.value);
+   
     const enterele = ele.target.value;
     const filterchar = poki.filter(poki=>{
      
        return poki.abilities.includes(enterele.toLowerCase())||poki.name.includes(enterele.toLowerCase())||poki.types.includes(enterele.toLowerCase())
     });
-    console.table(filterchar)
-    console.log(filterchar.length)
-    len = filterchar.length
-    displaystuff(filterchar,len)
+    // console.table(filterchar)
+    // console.log(filterchar.length)
+    
+    displaystuff(filterchar)
   });
    
 }
 
-
-
-
-
-
-
-
- 
-const  displaystuff = (poki,len = 1) =>{
-    const pokilist = document.getElementById('pokilist');
-   
-  
-      
-  if(len === 0 )  {
-    pokistr = `
-    <h1> No pokimon with this name </h1>
+const  displaystuff = (poki) =>{
     
-    `
-    pokilist.innerHTML = pokistr
-  }
+  const pokistr = poki.map((poki)=>`
+  <li class = "col s4">
     
-    else{
-      
-    const pokistr = poki.map((poki)=>`
-    <li class = "col s4">
-      
-  <div class="card charactersList ">
-  <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator  pad" src="${poki.image}">
-  </div>
-  <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">${poki.name}<i class="material-icons right material-icons-outlined">catching_pokemon</i></span>
-   
-   
-  </div>
+<div class="card charactersList ">
+<div class="card-image waves-effect waves-block waves-light">
+  <img class="activator  pad" src="${poki.image}">
+</div>
+<div class="card-content">
+  <span class="card-title activator grey-text text-darken-4">${poki.name}<i class="material-icons right material-icons-outlined">catching_pokemon</i></span>
+    </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">${poki.name}<i class="material-icons right">close</i></span>
     <p>Types:${poki.types}</p>
@@ -140,16 +126,11 @@ const  displaystuff = (poki,len = 1) =>{
     <p>Height:${poki.height}</p>
     <p>Weight:${poki.weight}</p>
   </div>
-</div>
-        
-       
-     </li>
-        `
-        
-    ).join(' ');
+  </div>
+
+   </li>
+      `).join(' ')
+      pokilist.innerHTML = pokistr;
     
-    pokilist.innerHTML = pokistr;
-    }
-
-} 
-
+    
+}
